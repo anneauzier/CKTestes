@@ -28,7 +28,9 @@ class CKCrudViewModel: ObservableObject {
     }
     
     private func addFruit(name: String) {
+        // definindo o tipo de record que vai ser armazenado os dados do app
         let newFruit = CKRecord(recordType: "Fruits")
+        // adicionando os record
         newFruit["name"] = name
         
         guard let image = UIImage(named: "img2"),
@@ -62,7 +64,7 @@ class CKCrudViewModel: ObservableObject {
         
         var returnedFruits: [FruitModel] = []
         
-        // retorna os record assim que forem encontrados
+        // O fechamento a ser executado quando um registro estiver disponível
         queryOperation.recordMatchedBlock = { (_, returnedResult) in
             switch returnedResult {
             case .success(let record):
@@ -75,7 +77,10 @@ class CKCrudViewModel: ObservableObject {
                 print("Error recordMatchedBlock: \(error)")
             }
         }
-
+        
+        // O fechamento a ser executado após o CloudKit recuperar todos os registros.
+        // Um cursor que indica que há mais resultados para buscar, ou nil se não há resultados adicionais. Use o cursor para criar uma nova operação de consulta quando estiver pronto para recuperar o próximo lote de resultados.
+        // Um erro que contém informações sobre um problema ou nil se o CloudKit recupera os resultados com sucess.
         queryOperation.queryResultBlock = { [weak self] returnedResult in
             DispatchQueue.main.async {
                 self?.fruits = returnedFruits

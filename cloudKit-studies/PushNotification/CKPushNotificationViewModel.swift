@@ -26,10 +26,12 @@ class CKPushNotificationViewModel: ObservableObject {
         }
     }
 
+    // essa verificacao é provavelmente manual. No geral, o subscribe das notificações são automáticas.
     func subscribeToNotifications() {
         let predicate = NSPredicate(value: true)
         let subscription = CKQuerySubscription(recordType: "Fruits", predicate: predicate, subscriptionID: "fruit_added_to_database", options: .firesOnRecordCreation)
         
+        // configuracao das notificacoes
         let notification = CKSubscription.NotificationInfo()
         notification.title = "There's a new fruit!"
         notification.alertBody = "Open the app to check your fruits."

@@ -5,6 +5,8 @@
 //  Created by Anne Auzier on 04/07/24.
 //
 
+// MARK: VERIFICAR SE O USUÁRIO POSSUI CONTA NO ICLOUD
+
 import CloudKit
 
 class CKUserViewModel: ObservableObject {
